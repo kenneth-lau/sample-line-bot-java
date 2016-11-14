@@ -45,9 +45,10 @@ public class EchoApplication {
     @EventMapping
     public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
         System.out.println("event: " + event);
+        TextMessage textMessage = new TextMessage("I'm a rocking donkey")
         final BotApiResponse apiResponse = lineMessagingService
                 .replyMessage(new ReplyMessage(event.getReplyToken(),
-                                               singletonList(new TextMessage(event.getMessage().getText()))))
+                                               textMessage))
                 .execute().body();
         System.out.println("Sent messages: " + apiResponse);
     }
